@@ -800,62 +800,100 @@ img {
   border-color: #4a2c14;
 }
 
-/* ── ORBIT: vintage spec sheet. Ice-blue paper, black ink,
-      one signal red and shuttle navy. Japanese camera catalogs,
-      BMC race cars and space-program manuals. ─────────────────── */
+/* ── GRID: graph-paper tins. Deep green-black, thin mustard
+      grid lines, cream text, black label bars. ───────────────── */
 
-[data-theme="orbit"] {
-  --bg: #dce8ec;
-  --bg-raised: #cfdee4;
-  --fg: #0f1418;
-  --muted: #536269;
-  --line: #b3c7cf;
-  --accent: #e0322b;
-  --accent-ink: #f4f8f9;
-  --marker: #e0322b;
-  --hl-bg: #14233d;
-  --hl-ink: #e6eef1;
-  --frame-bg: #c8d9e0;
-  --frame-ink: #14233d;
-  --font: "IBM Plex Mono", ui-monospace, monospace;
-  --font-display: "Big Shoulders Display", sans-serif;
-  --display-weight: 900;
-  --display-tracking: -0.01em;
-  --display-scale: 1.25;
+[data-theme="grid"] {
+  --bg: #10130e;
+  --bg-raised: #171b14;
+  --fg: #efe6d2;
+  --muted: #8d8a78;
+  --line: #2a2f22;
+  --accent: #f2a91f;
+  --accent-ink: #10130e;
+  --marker: #f2a91f;
+  --frame-bg: #f2a91f;
+  --frame-ink: #10130e;
+  --grid: rgba(242, 169, 31, 0.08);
+  --font: "Sora", system-ui, sans-serif;
+  --font-display: "Sora", sans-serif;
+  --display-weight: 700;
+  --display-tracking: -0.05em;
 }
 
-/* red dot instead of the ┌─ marker */
-[data-theme="orbit"] .label::before {
-  content: "●";
-  font-size: 10px;
-  vertical-align: 1px;
+/* the graph-paper grid behind everything */
+[data-theme="grid"] body {
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* lowercase headings, like the "pinhead oat bowl:" labels */
+[data-theme="grid"] .display,
+[data-theme="grid"] .case h2,
+[data-theme="grid"] .index-list .name {
+  text-transform: lowercase;
+}
+
+[data-theme="grid"] .label::before {
+  content: "+";
+  font-size: 15px;
+}
+
+/* black label bar with a mustard edge, like the tins */
+[data-theme="grid"] .highlight span {
+  background: #000;
+  color: var(--fg);
+  box-shadow: inset 3px 0 0 var(--accent);
+  padding: 3px 8px;
+}
+
+[data-theme="grid"] .btn.primary,
+[data-theme="grid"] .btn[aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+[data-theme="grid"] .btn[aria-pressed="true"] .count {
+  color: inherit;
+  opacity: 0.6;
 }
 
 /* + crosshairs instead of corner brackets */
-[data-theme="orbit"] .frame::after {
+[data-theme="grid"] .frame::after {
   inset: 0;
   background:
-    linear-gradient(var(--fg), var(--fg)) left 6px top 12px / 13px 1px,
-    linear-gradient(var(--fg), var(--fg)) left 12px top 6px / 1px 13px,
-    linear-gradient(var(--fg), var(--fg)) right 6px top 12px / 13px 1px,
-    linear-gradient(var(--fg), var(--fg)) right 12px top 6px / 1px 13px,
-    linear-gradient(var(--fg), var(--fg)) left 6px bottom 12px / 13px 1px,
-    linear-gradient(var(--fg), var(--fg)) left 12px bottom 6px / 1px 13px,
-    linear-gradient(var(--fg), var(--fg)) right 6px bottom 12px / 13px 1px,
-    linear-gradient(var(--fg), var(--fg)) right 12px bottom 6px / 1px 13px;
+    linear-gradient(var(--cross), var(--cross)) left 6px top 12px / 13px 1px,
+    linear-gradient(var(--cross), var(--cross)) left 12px top 6px / 1px 13px,
+    linear-gradient(var(--cross), var(--cross)) right 6px top 12px / 13px 1px,
+    linear-gradient(var(--cross), var(--cross)) right 12px top 6px / 1px 13px,
+    linear-gradient(var(--cross), var(--cross)) left 6px bottom 12px / 13px 1px,
+    linear-gradient(var(--cross), var(--cross)) left 12px bottom 6px / 1px 13px,
+    linear-gradient(var(--cross), var(--cross)) right 6px bottom 12px / 13px 1px,
+    linear-gradient(var(--cross), var(--cross)) right 12px bottom 6px / 1px 13px;
   background-repeat: no-repeat;
 }
 
-/* empty frame: one red dot, like a lens or the can */
-[data-theme="orbit"] .frame.empty {
-  background-image: radial-gradient(circle at 50% 42%, #e0322b 0 13%, transparent 13.4%);
+/* empty frame: a mustard tin face with its own darker grid */
+[data-theme="grid"] .frame.empty {
+  border-color: var(--accent);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-[data-theme="orbit"] .frame.empty::before {
-  margin-top: 34%;
+[data-theme="grid"] .frame.empty::before {
+  background: #000;
+  color: var(--accent);
+  padding: 6px 10px;
 }
 
-[data-theme="orbit"] .tags .on {
-  color: #14233d;
-  font-weight: 700;
+[data-theme="grid"] .frame {
+  --cross: var(--fg);
+}
+
+[data-theme="grid"] .frame.empty {
+  --cross: #10130e;
 }

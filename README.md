@@ -43,7 +43,7 @@ The filter button appears on its own.
 
 ### Themes
 There are five colour themes, picked with the little swatches in the header:
-SIGNAL (default), PIT LANE, POSTER, AMBER and ORBIT. The choice is
+SIGNAL (default), PIT LANE, POSTER, AMBER and GRID. The choice is
 remembered in the visitor's browser. You can also force one with a link,
 e.g. `projects.html?theme=amber`.
 
