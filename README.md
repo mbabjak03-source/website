@@ -41,8 +41,19 @@ Add `{ id: "software", label: "SOFTWARE" }` to `CATEGORIES` in
 `data/projects.js`, then use `category: "software"` on projects.
 The filter button appears on its own.
 
-### Change colours / font
-Edit the variables at the top of `assets/css/style.css` (`--accent` is the lime).
+### Themes
+There are five colour themes, picked with the little swatches in the header:
+SIGNAL (default), PIT LANE, POSTER, AMBER and IRON CORE. The choice is
+remembered in the visitor's browser. You can also force one with a link,
+e.g. `projects.html?theme=amber`.
+
+- **Change a theme's colours/fonts:** edit its `[data-theme="..."]` block at
+  the bottom of `assets/css/style.css`. SIGNAL is the `:root` block at the top.
+- **Add a theme:** copy one of those blocks, give it a new id, and add a line
+  for it to `themes` in `data/site.js` (the first entry there is the default).
+- **Remove a theme:** delete its line in `data/site.js`.
+- New Google Fonts must also be added to the fonts `<link>` in the four
+  `.html` files.
 
 ### Add a whole new page
 1. Copy `about.html` to e.g. `writing.html` and change `data-page="writing"`.

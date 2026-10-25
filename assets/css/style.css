@@ -1,6 +1,7 @@
 /* ─────────────────────────────────────────────────────────────
    STYLE
-   Change the colours and font in :root and the whole site follows.
+   :root is the default theme ("SIGNAL"). The other themes are at
+   the bottom of this file and only override these variables.
    ───────────────────────────────────────────────────────────── */
 
 :root {
@@ -11,8 +12,20 @@
   --line: #232321;
   --accent: #d4ff1a;
   --accent-ink: #0a0a0a; /* text colour on top of the accent */
+  --marker: var(--accent); /* the ┌─ marker on labels */
+  --hl-bg: var(--accent); /* highlighted paragraph */
+  --hl-ink: var(--accent-ink);
+  --frame-bg: #000;
+  --frame-ink: var(--muted); /* "NO IMAGE YET" text */
 
   --font: "Space Mono", ui-monospace, Menlo, Consolas, monospace;
+  --font-display: var(--font); /* big headings */
+  --display-weight: 700;
+  --display-style: normal;
+  --display-tracking: -0.02em;
+  --display-scale: 1;
+  --radius: 0px;
+
   --gutter: clamp(16px, 4vw, 40px);
   --max: 1240px;
 }
@@ -71,8 +84,35 @@ img {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(10, 10, 10, 0.92);
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(6px);
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 36px);
+  flex-wrap: wrap;
+}
+
+/* the five little theme swatches */
+.themes {
+  display: flex;
+  gap: 6px;
+}
+
+.theme-btn {
+  width: 18px;
+  height: 18px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+
+.theme-btn[aria-pressed="true"] {
+  outline: 1px solid var(--fg);
+  outline-offset: 2px;
 }
 
 .site-header .wrap {
@@ -127,16 +167,23 @@ img {
 
 .label::before {
   content: "┌─";
-  color: var(--accent);
+  color: var(--marker);
   margin-right: 12px;
   letter-spacing: 0;
 }
 
+.display,
+.case h2,
+.index-list .name {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+}
+
 .display {
-  font-size: clamp(44px, 9vw, 104px);
+  font-size: calc(clamp(44px, 9vw, 104px) * var(--display-scale));
   line-height: 0.95;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: var(--display-tracking);
   text-transform: uppercase;
   margin: 24px 0 28px;
   overflow-wrap: anywhere;
@@ -163,8 +210,8 @@ img {
 }
 
 .highlight span {
-  background: var(--accent);
-  color: var(--accent-ink);
+  background: var(--hl-bg);
+  color: var(--hl-ink);
   padding: 2px 4px;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -203,7 +250,8 @@ img {
   --off: 10px;
   position: relative;
   border: 1px solid var(--line);
-  background-color: #000;
+  border-radius: var(--radius);
+  background-color: var(--frame-bg);
   aspect-ratio: 1 / 1;
   overflow: hidden;
 }
@@ -251,7 +299,8 @@ img {
   content: attr(data-empty);
   font-size: 12px;
   letter-spacing: 0.2em;
-  color: var(--muted);
+  color: var(--frame-ink);
+  position: relative;
 }
 
 /* ── Buttons ──────────────────────────────────────────────── */
@@ -266,6 +315,7 @@ img {
 .btn {
   display: inline-block;
   border: 1px solid var(--line);
+  border-radius: var(--radius);
   background: var(--bg-raised);
   padding: 10px 14px;
   font: inherit;
@@ -538,7 +588,6 @@ img {
 
 .index-list .name {
   font-size: clamp(24px, 4vw, 40px);
-  font-weight: 700;
   letter-spacing: 0.02em;
 }
 
@@ -627,4 +676,158 @@ img {
     animation: none !important;
     transition: none !important;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   THEMES
+   Picked with the swatches in the header (saved in the browser).
+   Each block only changes variables, plus a few theme-only extras.
+   To add one: copy a block, rename it, and add it to THEMES in
+   data/site.js.
+   ───────────────────────────────────────────────────────────── */
+
+/* ── PIT LANE: halftone race poster on cream paper ────────── */
+
+[data-theme="pitlane"] {
+  --bg: #ece6d6;
+  --bg-raised: #e3dcc9;
+  --fg: #161616;
+  --muted: #6e685c;
+  --line: #cdc4ae;
+  --accent: #e2483f;
+  --accent-ink: #fff8e8;
+  --marker: #2aa3d6;
+  --frame-bg: #d8d0ba;
+  --font-display: "Archivo", sans-serif;
+  --display-weight: 900;
+  --display-style: italic;
+  --display-tracking: -0.01em;
+}
+
+[data-theme="pitlane"] body {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.07) 1px, transparent 1.4px);
+  background-size: 5px 5px;
+}
+
+/* the four racing stripes under the header */
+[data-theme="pitlane"] .site-header {
+  border-bottom: 0;
+}
+
+[data-theme="pitlane"] .site-header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: 12px;
+  background: linear-gradient(#f0952b 0 25%, #e2483f 0 50%, #9a4fa6 0 75%, #2aa3d6 0);
+}
+
+[data-theme="pitlane"] .frame.empty {
+  background-image: radial-gradient(rgba(0, 0, 0, 0.22) 1.1px, transparent 1.5px);
+  background-size: 4px 4px;
+}
+
+/* ── POSTER: bold type posters, cream / red / teal / olive ── */
+
+[data-theme="poster"] {
+  --bg: #121212;
+  --bg-raised: #1c1b19;
+  --fg: #ece3cf;
+  --muted: #8f897b;
+  --line: #2d2b27;
+  --accent: #e5392a;
+  --accent-ink: #ece3cf;
+  --marker: #2f8f8a;
+  --frame-bg: #ece3cf;
+  --frame-ink: #121212;
+  --font-display: "Unbounded", sans-serif;
+  --display-weight: 900;
+  --display-tracking: -0.03em;
+  --display-scale: 0.85;
+}
+
+/* three dots, like the posters */
+[data-theme="poster"] .frame.empty {
+  background-image:
+    radial-gradient(circle at 30% 30%, #e5392a 0 9%, transparent 9.5%),
+    radial-gradient(circle at 50% 30%, #7a4466 0 9%, transparent 9.5%),
+    radial-gradient(circle at 70% 30%, #2f8f8a 0 9%, transparent 9.5%);
+}
+
+[data-theme="poster"] .timeline .year,
+[data-theme="poster"] .tags .on {
+  color: #b5ad3c;
+}
+
+/* ── AMBER: glowing orange screen on a dark gadget ────────── */
+
+[data-theme="amber"] {
+  --bg: #0c0f10;
+  --bg-raised: #121618;
+  --fg: #ff9a3c;
+  --muted: #a35f26;
+  --line: #2c1f13;
+  --accent: #ff7a1a;
+  --accent-ink: #0c0f10;
+  --frame-bg: #070909;
+  --font-display: "VT323", monospace;
+  --display-weight: 400;
+  --display-tracking: 0.01em;
+  --display-scale: 1.3;
+}
+
+[data-theme="amber"] body {
+  text-shadow: 0 0 6px rgba(255, 122, 26, 0.45);
+}
+
+/* scanlines over everything */
+[data-theme="amber"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  background: repeating-linear-gradient(rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
+}
+
+[data-theme="amber"] .highlight span {
+  text-shadow: none;
+}
+
+[data-theme="amber"] .frame {
+  border-color: #4a2c14;
+}
+
+/* ── IRON CORE: iron / aqua / rust / heat / cream ─────────── */
+
+[data-theme="iron"] {
+  --bg: #222a2a;
+  --bg-raised: #2b3535;
+  --fg: #e2dac2;
+  --muted: #9aa29c;
+  --line: #374141;
+  --accent: #f39120;
+  --accent-ink: #222a2a;
+  --marker: #ec4624;
+  --hl-bg: #4fbbbc;
+  --hl-ink: #222a2a;
+  --frame-bg: #1b2222;
+  --font: "Archivo", system-ui, sans-serif;
+  --font-display: "Archivo", sans-serif;
+  --display-weight: 900;
+  --display-tracking: -0.02em;
+  --radius: 10px;
+}
+
+/* each project sits on its own card, like the palette sheet */
+[data-theme="iron"] .case-body {
+  background: var(--bg-raised);
+  border-radius: 14px;
+  padding: clamp(20px, 3vw, 36px);
+}
+
+[data-theme="iron"] .timeline .year {
+  color: #ec4624;
 }

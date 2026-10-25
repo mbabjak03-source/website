@@ -14,6 +14,17 @@ const SITE = {
     { label: "PROJECTS", href: "projects.html" },
   ],
 
+  // Colour themes, picked with the swatches in the header.
+  // The first one is the default. Colours here only draw the swatch;
+  // the real theme lives in assets/css/style.css under [data-theme="id"].
+  themes: [
+    { id: "signal", label: "SIGNAL", swatch: ["#0a0a0a", "#d4ff1a"] },
+    { id: "pitlane", label: "PIT LANE", swatch: ["#ece6d6", "#e2483f"] },
+    { id: "poster", label: "POSTER", swatch: ["#ece3cf", "#2f8f8a"] },
+    { id: "amber", label: "AMBER", swatch: ["#0c0f10", "#ff7a1a"] },
+    { id: "iron", label: "IRON CORE", swatch: ["#222a2a", "#4fbbbc"] },
+  ],
+
   // Shown in the footer and on the About page. Delete any you don't want.
   links: [
     { label: "EMAIL", href: "mailto:you@example.com" },

@@ -52,13 +52,53 @@ function renderHeader() {
     })
     .join("");
 
+  const swatches = SITE.themes
+    .map((t) => `<button class="theme-btn" data-theme-id="${t.id}" title="Theme: ${esc(t.label)}"
+      aria-label="Theme: ${esc(t.label)}"
+      style="background:linear-gradient(135deg, ${t.swatch[0]} 50%, ${t.swatch[1]} 50%)"></button>`)
+    .join("");
+
   document.querySelector("[data-header]").outerHTML = `
     <header class="site-header">
       <div class="wrap">
         <a class="logo" href="index.html">${esc(SITE.shortName)}</a>
-        <nav class="nav">${links}</nav>
+        <div class="header-right">
+          <nav class="nav">${links}</nav>
+          <div class="themes" role="group" aria-label="Colour theme">${swatches}</div>
+        </div>
       </div>
     </header>`;
+}
+
+// ── Themes ───────────────────────────────────────────────────
+// The chosen theme is stored in the browser (localStorage), and the
+// small script in each page's <head> applies it before anything draws.
+// Adding ?theme=amber to any URL also works, handy for sharing.
+
+function currentTheme() {
+  return document.documentElement.dataset.theme || SITE.themes[0].id;
+}
+
+function applyTheme(id) {
+  document.documentElement.dataset.theme = id;
+  try {
+    localStorage.setItem("theme", id);
+  } catch (e) {
+    // private browsing etc. — theme just won't be remembered
+  }
+  document.querySelectorAll("[data-theme-id]").forEach((b) =>
+    b.setAttribute("aria-pressed", b.dataset.themeId === id)
+  );
+  const name = document.querySelector("[data-theme-name]");
+  const theme = SITE.themes.find((t) => t.id === id);
+  if (name && theme) name.textContent = theme.label;
+}
+
+function setupThemePicker() {
+  document.querySelectorAll("[data-theme-id]").forEach((b) =>
+    b.addEventListener("click", () => applyTheme(b.dataset.themeId))
+  );
+  applyTheme(currentTheme());
 }
 
 function renderFooter() {
@@ -71,7 +111,7 @@ function renderFooter() {
       <div class="wrap">
         <span>© ${new Date().getFullYear()} ${esc(SITE.name)}</span>
         <nav>${links}</nav>
-        <span>LOCAL <span data-clock>--:--</span></span>
+        <span>THEME <span data-theme-name></span> · LOCAL <span data-clock>--:--</span></span>
       </div>
     </footer>`;
 
@@ -282,4 +322,5 @@ const page = document.body.dataset.page;
 renderHeader();
 document.querySelector("main .wrap").innerHTML = pages[page]();
 renderFooter();
+setupThemePicker();
 if (page === "projects") setupProjectFilter();
