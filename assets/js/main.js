@@ -76,7 +76,9 @@ function renderHeader() {
 // Adding ?theme=amber to any URL also works, handy for sharing.
 
 function currentTheme() {
-  return document.documentElement.dataset.theme || SITE.themes[0].id;
+  const saved = document.documentElement.dataset.theme;
+  // fall back to the default if the saved theme was removed from the list
+  return SITE.themes.some((t) => t.id === saved) ? saved : SITE.themes[0].id;
 }
 
 function applyTheme(id) {

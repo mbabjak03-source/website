@@ -22,7 +22,7 @@ const SITE = {
     { id: "pitlane", label: "PIT LANE", swatch: ["#ece6d6", "#e2483f"] },
     { id: "poster", label: "POSTER", swatch: ["#ece3cf", "#2f8f8a"] },
     { id: "amber", label: "AMBER", swatch: ["#0c0f10", "#ff7a1a"] },
-    { id: "iron", label: "IRON CORE", swatch: ["#222a2a", "#4fbbbc"] },
+    { id: "orbit", label: "ORBIT", swatch: ["#dce8ec", "#e0322b"] },
   ],
 
   // Shown in the footer and on the About page. Delete any you don't want.

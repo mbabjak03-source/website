@@ -800,34 +800,62 @@ img {
   border-color: #4a2c14;
 }
 
-/* ── IRON CORE: iron / aqua / rust / heat / cream ─────────── */
+/* ── ORBIT: vintage spec sheet. Ice-blue paper, black ink,
+      one signal red and shuttle navy. Japanese camera catalogs,
+      BMC race cars and space-program manuals. ─────────────────── */
 
-[data-theme="iron"] {
-  --bg: #222a2a;
-  --bg-raised: #2b3535;
-  --fg: #e2dac2;
-  --muted: #9aa29c;
-  --line: #374141;
-  --accent: #f39120;
-  --accent-ink: #222a2a;
-  --marker: #ec4624;
-  --hl-bg: #4fbbbc;
-  --hl-ink: #222a2a;
-  --frame-bg: #1b2222;
-  --font: "Archivo", system-ui, sans-serif;
-  --font-display: "Archivo", sans-serif;
+[data-theme="orbit"] {
+  --bg: #dce8ec;
+  --bg-raised: #cfdee4;
+  --fg: #0f1418;
+  --muted: #536269;
+  --line: #b3c7cf;
+  --accent: #e0322b;
+  --accent-ink: #f4f8f9;
+  --marker: #e0322b;
+  --hl-bg: #14233d;
+  --hl-ink: #e6eef1;
+  --frame-bg: #c8d9e0;
+  --frame-ink: #14233d;
+  --font: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "Big Shoulders Display", sans-serif;
   --display-weight: 900;
-  --display-tracking: -0.02em;
-  --radius: 10px;
+  --display-tracking: -0.01em;
+  --display-scale: 1.25;
 }
 
-/* each project sits on its own card, like the palette sheet */
-[data-theme="iron"] .case-body {
-  background: var(--bg-raised);
-  border-radius: 14px;
-  padding: clamp(20px, 3vw, 36px);
+/* red dot instead of the ┌─ marker */
+[data-theme="orbit"] .label::before {
+  content: "●";
+  font-size: 10px;
+  vertical-align: 1px;
 }
 
-[data-theme="iron"] .timeline .year {
-  color: #ec4624;
+/* + crosshairs instead of corner brackets */
+[data-theme="orbit"] .frame::after {
+  inset: 0;
+  background:
+    linear-gradient(var(--fg), var(--fg)) left 6px top 12px / 13px 1px,
+    linear-gradient(var(--fg), var(--fg)) left 12px top 6px / 1px 13px,
+    linear-gradient(var(--fg), var(--fg)) right 6px top 12px / 13px 1px,
+    linear-gradient(var(--fg), var(--fg)) right 12px top 6px / 1px 13px,
+    linear-gradient(var(--fg), var(--fg)) left 6px bottom 12px / 13px 1px,
+    linear-gradient(var(--fg), var(--fg)) left 12px bottom 6px / 1px 13px,
+    linear-gradient(var(--fg), var(--fg)) right 6px bottom 12px / 13px 1px,
+    linear-gradient(var(--fg), var(--fg)) right 12px bottom 6px / 1px 13px;
+  background-repeat: no-repeat;
+}
+
+/* empty frame: one red dot, like a lens or the can */
+[data-theme="orbit"] .frame.empty {
+  background-image: radial-gradient(circle at 50% 42%, #e0322b 0 13%, transparent 13.4%);
+}
+
+[data-theme="orbit"] .frame.empty::before {
+  margin-top: 34%;
+}
+
+[data-theme="orbit"] .tags .on {
+  color: #14233d;
+  font-weight: 700;
 }
