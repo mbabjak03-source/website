@@ -556,6 +556,111 @@ img {
   margin-top: 40px;
 }
 
+/* ── Project write-up blocks (see renderStory in main.js) ─── */
+
+.story {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 5vw, 56px);
+}
+
+.story .prose p:last-child {
+  margin-bottom: 0;
+}
+
+.story figure {
+  margin: 0;
+  min-width: 0;
+}
+
+.story figcaption {
+  margin-top: 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.frame.photo {
+  aspect-ratio: 4 / 3;
+}
+
+.frame.pano {
+  aspect-ratio: 21 / 9;
+}
+
+.story-heading {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  margin: 0;
+  padding-top: 28px;
+  border-top: 1px solid var(--line);
+}
+
+/* single image: a bit narrower than the page unless wide:true */
+.story-image {
+  max-width: 880px;
+}
+
+.story-image:has(.pano) {
+  max-width: none;
+}
+
+/* two or three images side by side */
+.story-row {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 2), minmax(0, 1fr));
+  gap: 20px;
+}
+
+/* text next to an image */
+.story-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
+}
+
+.story-split.img-left figure {
+  order: -1;
+}
+
+.story-quote {
+  margin: 0;
+  max-width: 28ch;
+  padding-left: 20px;
+  border-left: 3px solid var(--accent);
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  font-style: var(--display-style);
+  font-size: clamp(22px, 3vw, 32px);
+  line-height: 1.2;
+}
+
+.story-specs {
+  margin: 0;
+}
+
+@media (max-width: 820px) {
+  .story-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  /* on phones the image always comes after its text */
+  .story-split.img-left figure {
+    order: 0;
+  }
+
+  .story-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* ── Home ─────────────────────────────────────────────────── */
 
 .index-list {
@@ -832,7 +937,8 @@ img {
 /* lowercase headings, like the "pinhead oat bowl:" labels */
 [data-theme="grid"] .display,
 [data-theme="grid"] .case h2,
-[data-theme="grid"] .index-list .name {
+[data-theme="grid"] .index-list .name,
+[data-theme="grid"] .story-heading {
   text-transform: lowercase;
 }
 

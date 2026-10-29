@@ -28,8 +28,12 @@ only edit files in `data/`.**
    Keep them under ~500 KB (export at ~1600px wide, JPG quality 80).
 2. Open `data/projects.js`, copy an existing `{ ... },` block and paste it at
    the top of the `PROJECTS` list.
-3. Change `id` (unique, lowercase-with-dashes), `title`, `category`, `year`,
+3. Change `id` (unique, no spaces), `title`, `category`, `year`,
    `status`, `summary`, `cover`, `body`, `images`, `links`.
+   `body` is a list of blocks you mix freely: paragraphs, headings, single
+   or full-width images, rows of 2–3 images, text beside an image (left or
+   right), quotes and spec tables. The full list is at the top of
+   `data/projects.js`, and the MGB project uses every one of them.
 4. Refresh the browser. It shows up on the Projects page, and its own page is
    at `project.html?id=your-id`.
 

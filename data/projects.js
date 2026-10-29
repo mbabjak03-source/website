@@ -7,9 +7,25 @@
 //            project.html?id=your-id
 //  category  must be one of CATEGORIES below
 //  cover     image in assets/img/ (or "" for an empty frame)
-//  body      the write-up, one string per paragraph. You can use
-//            simple HTML inside, e.g. <strong>bold</strong> or <a href="…">link</a>
-//  images    optional extra images shown under the write-up
+//  body      the write-up: a list of blocks, shown top to bottom.
+//            Mix them however you like (see "example-car-build"):
+//
+//    "Some text."                                   a paragraph
+//    { heading: "The engine" }                       a section heading
+//    { image: "assets/img/a.jpg", caption: "…" }     one image
+//    { image: "…", caption: "…", wide: true }        one full-width image
+//    { images: ["a.jpg", "b.jpg"], captions: ["…", "…"] }
+//                                                    2 or 3 images side by side
+//    { text: "…", image: "…", caption: "…" }         text with image on the right
+//    { text: "…", image: "…", side: "left" }         …or image on the left
+//    { quote: "…" }                                  a big pull-quote
+//    { specs: [{ label: "ENGINE", value: "1275cc" }] }
+//                                                    a spec table
+//
+//            "text" can also be a list of paragraphs: ["…", "…"].
+//            Captions are optional; images are numbered FIG. 01, 02…
+//            Paragraphs may use simple HTML: <strong>bold</strong>, <a href="…">link</a>
+//  images    optional gallery of extra images at the very end
 //  links     optional buttons (repo, video, article…)
 //
 //  Everything below is PLACEHOLDER content.
@@ -22,16 +38,48 @@ const CATEGORIES = [
 
 const PROJECTS = [
   {
-    id: "example-car-build",
-    title: "Example Car Build",
+    id: "MGB",
+    title: "1970 MGB GT full restauration",
     category: "cars",
     year: "2026",
-    status: "IN PROGRESS",
-    summary: "A short one or two sentence description shown on the projects list.",
+    status: "DONE",
+    summary: "I can't summarize this rebuild - have a look",
     cover: "",
     body: [
-      "Start with what the project is and why you started it.",
-      "Then the interesting part: problems you hit, how you solved them, what you'd do differently.",
+
+      { heading: "This is a wild one" },
+      { quote: "Easy tune up leads to full restoration" },
+
+        "I almost did not buy this car, but let me explain",
+      { specs: [
+        { label: "CAR", value: "MG , MGB GT , 1970 " },
+        { label: "ENGINE", value: " 1800cc B-series - well not anymore" },
+        { label: "TIME", value: "8 months" },
+      ] },
+
+
+      { image: "assets/img/MGTUV.jpg", caption: "The second after I got the car trough inspection", wide: true },
+
+
+      {
+        text: [
+          "Text next to an image. Good for explaining one specific part or step.",
+          "It can be several paragraphs long.",
+        ]
+      },
+
+      {
+        text: [
+          "Text next to an image. Good for explaining one specific part or step.",
+          "It can be several paragraphs long.",
+        ],
+        image: "",
+        caption: "Image on the right",
+      },
+      { text: "Same thing, image flipped to the left.", image: "", caption: "Image on the left", side: "left" },
+
+      { heading: "Result" },
+      { images: ["", ""], captions: ["Before", "After"] },
       "Finish with where it stands now.",
     ],
     images: [],

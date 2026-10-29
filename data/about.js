@@ -6,19 +6,19 @@
 const ABOUT = {
   // Short paragraphs about you. Each string is one paragraph.
   bio: [
-    "I'm an engineering student currently writing my master's thesis. I like building things I can touch: cars, parts, and objects that work as well as they look.",
-    "This site is where I keep track of what I've made and what I've learned along the way.",
+    "I'm an engineering student at TUM currently writing my master's thesis. I like building things: Rockets, cars, & things that just look cool & have a soul",
+    "This site is where I keep track of what I've made and what I've learned along the way. No generative AI has been used for this site",
   ],
 
   // Optional portrait. Put the file in assets/img/ and write its name here,
   // e.g. "assets/img/me.jpg". Leave as "" to show an empty frame.
-  photo: "",
+  photo: "assets/img/PFP.jpg",
 
   // Quick facts shown as a small table next to the bio.
   facts: [
-    { label: "BASED IN", value: "Your city" },
-    { label: "STUDYING", value: "MSc, your field" },
-    { label: "FOCUS", value: "Cars / Design" },
+    { label: "BASED IN", value: "Germany - Munich" },
+    { label: "STUDYING", value: "M.Sc. Aerospace" },
+    { label: "FOCUS", value: "Rockets / Cars / Design" },
   ],
 
   // Achievements, newest first. "tag" is a short category label.

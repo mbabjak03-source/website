@@ -39,6 +39,68 @@ function rule(label, meta = "") {
     </div>`;
 }
 
+// ── Project write-up blocks ──────────────────────────────────
+// A project's `body` is a list of blocks. A plain "string" is a
+// paragraph; the { ... } kinds are listed at the top of data/projects.js.
+
+function renderStory(p) {
+  let figNo = 0;
+  const paras = (text) => [].concat(text).map((t) => `<p>${t}</p>`).join("");
+  const figure = (src, caption, cls = "photo") => {
+    figNo += 1;
+    return `
+      <figure>
+        ${frame(src, caption || p.title, cls)}
+        <figcaption>FIG. ${pad(figNo)}${caption ? ` — ${esc(caption)}` : ""}</figcaption>
+      </figure>`;
+  };
+
+  return p.body
+    .map((b) => {
+      if (typeof b === "string") {
+        return `<div class="prose story-text">${paras(b)}</div>`;
+      }
+      if (b.heading) {
+        return `<h2 class="story-heading">${esc(b.heading)}</h2>`;
+      }
+      if (b.quote) {
+        return `<blockquote class="story-quote">${esc(b.quote)}</blockquote>`;
+      }
+      if (b.specs) {
+        const rows = b.specs
+          .map((s) => `<div><dt>${esc(s.label)}</dt><dd>${esc(s.value)}</dd></div>`)
+          .join("");
+        return `<dl class="facts story-specs">${rows}</dl>`;
+      }
+      // "image" in b: an empty "" still counts, it shows an empty frame
+      if (b.text && "image" in b) {
+        const side = b.side === "left" ? " img-left" : "";
+        return `
+          <div class="story-split${side}">
+            <div class="prose">${paras(b.text)}</div>
+            ${figure(b.image, b.caption)}
+          </div>`;
+      }
+      if (b.images) {
+        const captions = [].concat(b.captions || []);
+        return `
+          <div class="story-row" style="--n:${b.images.length}">
+            ${b.images.map((src, i) => figure(src, captions[i])).join("")}
+          </div>`;
+      }
+      if ("image" in b) {
+        return `<div class="story-image">${figure(b.image, b.caption, b.wide ? "pano" : "photo")}</div>`;
+      }
+      // text without an image: just show the text ("side" only moves an image)
+      if (b.text) {
+        return `<div class="prose story-text">${paras(b.text)}</div>`;
+      }
+      console.warn(`Project "${p.id}": don't know how to show this block`, b);
+      return "";
+    })
+    .join("");
+}
+
 // ── Shared header + footer ───────────────────────────────────
 
 function renderHeader() {
@@ -253,7 +315,7 @@ const pages = {
       </section>
       <section class="section">
         ${rule("Write-up", `${categoryLabel(p.category)} · ${esc(p.year)}`)}
-        <div class="prose">${p.body.map((para) => `<p>${para}</p>`).join("")}</div>
+        <div class="story">${renderStory(p)}</div>
         ${gallery}
       </section>`;
   },
