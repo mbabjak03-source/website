@@ -48,7 +48,7 @@ const PROJECTS = [
     body: [
 
       { heading: "This is a wild one" },
-      { quote: "Easy tune up leads to full restoration" },
+      { quote: "I cant summarize this one" },
 
         "I almost did not buy this car, but let me explain",
       { specs: [
@@ -68,7 +68,7 @@ const PROJECTS = [
 
           "I sent a message, and the seller told me he already sold it - oh well",
 
-          "Couple days later I get a call from the same seller telling me the prvious buyer did not have the money for it",
+          "Couple days later I get a call from the same seller telling me the previous buyer did not have the money for it",
 
           "Couple of hours later, I am in the middle of Frankfurt, shaking hands with the seller - apparently some well known movie director, small world",
 
@@ -77,13 +77,50 @@ const PROJECTS = [
 
       {
         text: [
-          "Text next to an image. Good for explaining one specific part or step.",
-          "It can be several paragraphs long.",
+          "This is the one single image I took when buying it",
+          "It's much worse than it looks",
         ],
-        image: "",
-        caption: "Image on the right",
+        image: "assets/img/MGBBUY.jpg",
+        caption: "MGB sees daylight for the first time in 5 years of sitting in a garage",
       },
-      { text: "Same thing, image flipped to the left.", image: "", caption: "Image on the left", side: "left" },
+
+
+      {
+        text: [
+          "I'm a Hypocrite. I advise people to never buy cars that have not been used for a while and here I am in Frankfurt buying this MGB GT which stood for more than 5 years in a garage",
+
+          "The car was first registered in Panama (!), then Florida and finally imported into Germany. There it was shoved into a garage and forgotten",
+
+          "At first glance - paint was great, ends about here",
+          "There was a mouse nest in the rear right, I will never forget the smell. Also the time that I learned that mouse urine corrodes metal much faster than rainwater",
+          "There was no battery at hand, so I was not able to check anything. Rust-wise it looked great (for an MG, other than some fiberglassed stuff up the wheelwell)",
+          "I had no idea if the engine even made compression",
+           "So naturally I bought the car in cash",
+
+        ]
+      },
+
+
+
+
+
+
+      { text: "I organized a towing company to tow the car out of Frankfurt (yes I paid full price and left onyl with a signed piece of paper)", image: "assets/img/MGBARRIVE.jpg", caption: "Arrival of the MGB at home - caked in roadsalt", side: "left" },
+
+
+
+              { text: "First thin on the list: Get rid of the mouse nest.To this day I fail to comprehend how such tiny animal can cause a smell so bad", image: "assets/img/MOUSE.jpg", caption: "No Eviction notice, straight into the garbage", side: "right" },
+
+
+    {
+      text: [
+        "",
+
+      ]
+    },
+
+
+
 
       { heading: "Result" },
       { images: ["", ""], captions: ["Before", "After"] },
