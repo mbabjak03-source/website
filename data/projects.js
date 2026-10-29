@@ -63,8 +63,15 @@ const PROJECTS = [
 
       {
         text: [
-          "Text next to an image. Good for explaining one specific part or step.",
-          "It can be several paragraphs long.",
+          "I saw this car pop up on Kleinanzeigen one day for a good price. At the time I was just in teh process of fixing my Dad's Datsun 280zx, so I did not want to get another project",
+          "Until my Dad told me, 'Just go get it' ",
+
+          "I sent a message, and the seller told me he already sold it - oh well",
+
+          "Couple days later I get a call from the same seller telling me the prvious buyer did not have the money for it",
+
+          "Couple of hours later, I am in the middle of Frankfurt, shaking hands with the seller - apparently some well known movie director, small world",
+
         ]
       },
 
