@@ -7,7 +7,7 @@ const ABOUT = {
   // Short paragraphs about you. Each string is one paragraph.
   bio: [
     "I'm an engineering student at TUM currently writing my master's thesis. I like building things: Rockets, cars, & things that just look cool & have a soul",
-    "This site is where I keep track of what I've made and what I've learned along the way. No generative AI has been used for this site",
+    "This site is where I keep track of what I've made and what I've learned along the way. No generative AI has been used for this site, I build this in my free time.",
   ],
 
   // Optional portrait. Put the file in assets/img/ and write its name here,

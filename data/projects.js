@@ -39,15 +39,15 @@ const CATEGORIES = [
 const PROJECTS = [
   {
     id: "MGB",
-    title: "1970 MGB GT full restauration",
+    title: "1970 MGB GT full restoration",
     category: "cars",
     year: "2026",
     status: "DONE",
     summary: "I can't summarize this rebuild - have a look",
-    cover: "",
+    cover: "assets/img/MGCRANK.jpeg",
     body: [
 
-      { heading: "This is a wild one" },
+
       { quote: "I cant summarize this one" },
 
         "I almost did not buy this car, but let me explain",
@@ -109,17 +109,17 @@ const PROJECTS = [
 
 
 
-              { text: "First thin on the list: Get rid of the mouse nest.To this day I fail to comprehend how such tiny animal can cause a smell so bad", image: "assets/img/MOUSE.jpg", caption: "No Eviction notice, straight into the garbage", side: "right" },
+              { text: "First thing on the list: Get rid of the mouse nest. The smell was pretty bad, meaning all the interior carpets would need to be replaced", image: "assets/img/MOUSE.jpg", caption: "No Eviction notice, straight into the garbage", side: "right" },
 
 
     {
       text: [
-        "",
-
+        "The first look at the state of the car revaled that the entire fuellign system would need to be overhauled.",
+        "All fuellines were about to crack, the fuel pump had a stiffened membrane, the fuel tank itself would need derusting.",
       ]
     },
 
-
+      {image: "assets/img/MGBTANK.jpg", caption: "No Eviction notice, straight into the garbage", side: "right" },
 
 
       { heading: "Result" },
