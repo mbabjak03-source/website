@@ -37,6 +37,21 @@ only edit files in `data/`.**
 4. Refresh the browser. It shows up on the Projects page, and its own page is
    at `project.html?id=your-id`.
 
+### Photos in a write-up
+Portrait and landscape photos both work. Photos in the write-up and the
+gallery keep their own shape and are never cropped; a very tall photo is
+scaled down to fit on one screen. (The cover image and the About portrait
+are still cropped to fill their frame.)
+
+To put two (or three) photos next to each other, add this block to `body`:
+
+```js
+{ images: ["assets/img/before.jpg", "assets/img/after.jpg"], captions: ["Before", "After"] },
+```
+
+They line up at the same height, even when one is portrait and one is
+landscape, and they stay side by side on phones.
+
 ### Add an achievement
 Copy a block in `ABOUT.achievements` in `data/about.js`, newest at the top.
 

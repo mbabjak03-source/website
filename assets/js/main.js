@@ -380,6 +380,19 @@ function setupProjectFilter() {
   fromHash();
 }
 
+// Side-by-side photos: give each one a width in proportion to its shape
+// (width ÷ height), so a portrait and a landscape photo end up the same height.
+function setupPhotoRows() {
+  document.querySelectorAll(".story-row img").forEach((img) => {
+    const fit = () => {
+      if (!img.naturalWidth) return;
+      img.closest("figure").style.setProperty("--r", img.naturalWidth / img.naturalHeight);
+    };
+    if (img.complete) fit();
+    else img.addEventListener("load", fit);
+  });
+}
+
 // ── Start ────────────────────────────────────────────────────
 
 const page = document.body.dataset.page;
@@ -388,3 +401,4 @@ document.querySelector("main .wrap").innerHTML = pages[page]();
 renderFooter();
 setupThemePicker();
 if (page === "projects") setupProjectFilter();
+if (page === "project") setupPhotoRows();
