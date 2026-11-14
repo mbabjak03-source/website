@@ -60,7 +60,8 @@ a {
   color: inherit;
 }
 
-img {
+img,
+video {
   display: block;
   max-width: 100%;
 }
@@ -274,7 +275,7 @@ img {
   background-repeat: no-repeat;
 }
 
-.frame img {
+.frame :is(img, video) {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -438,11 +439,11 @@ img {
   display: block;
 }
 
-.case .frame img {
+.case .frame :is(img, video) {
   transition: transform 0.4s ease;
 }
 
-.case .frame:hover img {
+.case .frame:hover :is(img, video) {
   transform: scale(1.03);
 }
 
@@ -565,7 +566,7 @@ img {
   aspect-ratio: auto;
 }
 
-.gallery .frame:not(.empty) img {
+.gallery .frame:not(.empty) :is(img, video) {
   height: auto;
 }
 
@@ -608,7 +609,7 @@ img {
   max-width: 100%;
 }
 
-.story .frame:not(.empty) img {
+.story .frame:not(.empty) :is(img, video) {
   width: auto;
   height: auto;
   max-width: 100%;
@@ -618,7 +619,7 @@ img {
 
 /* wide: true → always the full page width */
 .story .frame.pano:not(.empty),
-.story .frame.pano:not(.empty) img {
+.story .frame.pano:not(.empty) :is(img, video) {
   width: 100%;
 }
 
@@ -667,7 +668,7 @@ img {
 }
 
 .story-row .frame:not(.empty),
-.story-row .frame:not(.empty) img {
+.story-row .frame:not(.empty) :is(img, video) {
   width: 100%;
   max-height: none;
 }

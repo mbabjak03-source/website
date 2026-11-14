@@ -22,6 +22,11 @@
 //    { specs: [{ label: "ENGINE", value: "1275cc" }] }
 //                                                    a spec table
 //
+//    VIDEOS: anywhere an image goes (image, images, cover), you can use
+//    a video instead, e.g. "assets/video/engine.mp4". It loops silently
+//    like a GIF. Add sound: true to the block for play controls + sound:
+//    { image: "assets/video/startup.mp4", caption: "…", sound: true }
+//
 //            "text" can also be a list of paragraphs: ["…", "…"].
 //            Captions are optional; images are numbered FIG. 01, 02…
 //            Paragraphs may use simple HTML: <strong>bold</strong>, <a href="…">link</a>
@@ -114,13 +119,12 @@ const PROJECTS = [
 
     {
       text: [
-        "The first look at the state of the car revaled that the entire fuellign system would need to be overhauled.",
-        "All fuellines were about to crack, the fuel pump had a stiffened membrane, the fuel tank itself would need derusting.",
+        "The first look at the state of the car revaled that the entire fuel system would need to be overhauled.",
+        "All fuellines were about to crack, the fuel pump had a stiffened membrane, the fuel tank itself would need de-rusting.",
       ]
     },
 
-      {image: "assets/img/MGBTANK.jpg", caption: "No Eviction notice, straight into the garbage", side: "right" },
-
+      { images: ["assets/img/MGBTANK.jpg", "assets/img/MGCRANK.jpeg"], captions: ["Fuel tank", "Crank"] },
 
       { heading: "Result" },
       { images: ["", ""], captions: ["Before", "After"] },

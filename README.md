@@ -52,6 +52,25 @@ To put two (or three) photos next to each other, add this block to `body`:
 They line up at the same height, even when one is portrait and one is
 landscape, and they stay side by side on phones.
 
+### Videos
+Put short clips in `assets/video/` and use them anywhere an image goes:
+a single `image`, an `images` row, text-beside-image, or a project `cover`.
+
+```js
+{ image: "assets/video/engine-idle.mp4", caption: "First start" },
+{ image: "assets/video/startup.mp4", caption: "With sound", sound: true },
+```
+
+- Without `sound: true` a video loops silently like a GIF, and only plays
+  while it's on screen. With `sound: true` it gets normal play controls.
+- Use **MP4 (H.264)**. iPhone videos are often `.mov` (HEVC), which some
+  browsers can't play: convert them with HandBrake (free, preset
+  "Fast 1080p30") or export as MP4 from your phone/editor.
+- Keep clips short and small: 5–20 seconds, 720p or 1080p, ideally under
+  10 MB. GitHub refuses any file over 100 MB, and every video you commit
+  stays in the repo's history even if you delete it later. For anything
+  long, upload it to YouTube and link to it with a `links` button instead.
+
 ### Add an achievement
 Copy a block in `ABOUT.achievements` in `data/about.js`, newest at the top.
 

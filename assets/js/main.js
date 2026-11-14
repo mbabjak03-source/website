@@ -22,12 +22,27 @@ function categoryLabel(id) {
   return cat ? cat.label : id.toUpperCase();
 }
 
-// An image inside the corner-bracket frame, or an empty frame.
-function frame(src, alt, extraClass = "", emptyText = "NO IMAGE YET") {
+const isVideo = (src) => /\.(mp4|webm|mov)$/i.test(src || "");
+
+// A photo or a video. Videos loop silently like a GIF (started and paused
+// by setupVideos as they scroll in and out of view); with sound: true they
+// get normal play controls instead.
+function media(src, alt, sound = false) {
+  if (!isVideo(src)) {
+    return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy">`;
+  }
+  if (sound) {
+    return `<video src="${esc(src)}" controls playsinline preload="metadata" aria-label="${esc(alt)}"></video>`;
+  }
+  return `<video src="${esc(src)}" data-loop muted loop playsinline preload="metadata" aria-label="${esc(alt)}"></video>`;
+}
+
+// A photo/video inside the corner-bracket frame, or an empty frame.
+function frame(src, alt, extraClass = "", emptyText = "NO IMAGE YET", sound = false) {
   if (!src) {
     return `<div class="frame empty ${extraClass}" data-empty="${esc(emptyText)}"></div>`;
   }
-  return `<div class="frame ${extraClass}"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy"></div>`;
+  return `<div class="frame ${extraClass}">${media(src, alt, sound)}</div>`;
 }
 
 function rule(label, meta = "") {
@@ -46,11 +61,11 @@ function rule(label, meta = "") {
 function renderStory(p) {
   let figNo = 0;
   const paras = (text) => [].concat(text).map((t) => `<p>${t}</p>`).join("");
-  const figure = (src, caption, cls = "photo") => {
+  const figure = (src, caption, cls = "photo", sound = false) => {
     figNo += 1;
     return `
       <figure>
-        ${frame(src, caption || p.title, cls)}
+        ${frame(src, caption || p.title, cls, "NO IMAGE YET", sound)}
         <figcaption>FIG. ${pad(figNo)}${caption ? ` — ${esc(caption)}` : ""}</figcaption>
       </figure>`;
   };
@@ -78,18 +93,18 @@ function renderStory(p) {
         return `
           <div class="story-split${side}">
             <div class="prose">${paras(b.text)}</div>
-            ${figure(b.image, b.caption)}
+            ${figure(b.image, b.caption, "photo", b.sound)}
           </div>`;
       }
       if (b.images) {
         const captions = [].concat(b.captions || []);
         return `
           <div class="story-row" style="--n:${b.images.length}">
-            ${b.images.map((src, i) => figure(src, captions[i])).join("")}
+            ${b.images.map((src, i) => figure(src, captions[i], "photo", b.sound)).join("")}
           </div>`;
       }
       if ("image" in b) {
-        return `<div class="story-image">${figure(b.image, b.caption, b.wide ? "pano" : "photo")}</div>`;
+        return `<div class="story-image">${figure(b.image, b.caption, b.wide ? "pano" : "photo", b.sound)}</div>`;
       }
       // text without an image: just show the text ("side" only moves an image)
       if (b.text) {
@@ -355,12 +370,13 @@ function setupProjectFilter() {
                 <div class="buttons"><a class="btn primary" href="${href}">Read more →</a>${links}</div>
               </div>
               <a class="frame${p.cover ? "" : " empty"}" href="${href}" ${p.cover ? "" : 'data-empty="NO IMAGE YET"'} aria-label="${esc(p.title)}">
-                ${p.cover ? `<img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy">` : ""}
+                ${p.cover ? media(p.cover, p.title) : ""}
               </a>
             </div>
           </article>`;
       })
       .join("");
+    setupVideos(); // cover videos are new after every filter click
   }
 
   // the filter lives in the URL (projects.html#cars) so it can be linked to
@@ -391,6 +407,33 @@ function setupPhotoRows() {
     if (img.complete) fit();
     else img.addEventListener("load", fit);
   });
+  // same for videos, once their size is known
+  document.querySelectorAll(".story-row video").forEach((video) => {
+    const fit = () => {
+      if (!video.videoWidth) return;
+      video.closest("figure").style.setProperty("--r", video.videoWidth / video.videoHeight);
+    };
+    if (video.readyState >= 1) fit();
+    else video.addEventListener("loadedmetadata", fit);
+  });
+}
+
+// Looping videos only play while on screen, so a page full of clips stays
+// light. Visitors who ask their system for reduced motion get play controls
+// instead of autoplay.
+function setupVideos() {
+  const videos = document.querySelectorAll("video[data-loop]");
+  if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    videos.forEach((v) => (v.controls = true));
+    return;
+  }
+  const watcher = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) e.target.play().catch(() => {});
+      else e.target.pause();
+    });
+  }, { threshold: 0.25 });
+  videos.forEach((v) => watcher.observe(v));
 }
 
 // ── Start ────────────────────────────────────────────────────
@@ -402,3 +445,4 @@ renderFooter();
 setupThemePicker();
 if (page === "projects") setupProjectFilter();
 if (page === "project") setupPhotoRows();
+setupVideos();
